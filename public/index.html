@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NexusDig – Learn. Build. Automate.</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.0"></script>
+<style>
+:root{--bg:#fff;--fg:#0f172a;--mut:#475569;--card:#f8fafc;--bd:#e2e8f0;--br:#047857;--brf:#fff;--soft:#d1fae5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1020;--fg:#e5e7eb;--mut:#94a3b8;--card:#131a2e;--bd:#25304d;--br:#34d399;--brf:#0b1020;--soft:#10261f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1020;--fg:#e5e7eb;--mut:#94a3b8;--card:#131a2e;--bd:#25304d;--br:#34d399;--brf:#0b1020;--soft:#10261f;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.mut{color:var(--mut)}.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;transition:transform .2s,box-shadow .2s,border-color .2s}
+a.card:hover,.lift:hover{transform:translateY(-4px);box-shadow:0 16px 36px -14px rgba(16,185,129,.45);border-color:var(--br)}
+.hero{position:relative;overflow:hidden;background:radial-gradient(60% 55% at 85% 0%,rgba(16,185,129,.22),transparent),radial-gradient(45% 45% at 0% 35%,rgba(20,184,166,.15),transparent)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--bd) 1px,transparent 1px),linear-gradient(90deg,var(--bd) 1px,transparent 1px);background-size:44px 44px;opacity:.55;-webkit-mask-image:linear-gradient(#000,transparent 85%);mask-image:linear-gradient(#000,transparent 85%)}
+.gt{background:linear-gradient(90deg,var(--br),#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:1.3rem;background:linear-gradient(135deg,#059669,#0e7490);box-shadow:0 8px 18px -8px rgba(16,185,129,.7)}
+.thumb{height:130px;border-radius:12px;display:grid;place-items:center;font-size:2.5rem;background:linear-gradient(135deg,#10b981,#0e7490)}.t1{background:linear-gradient(135deg,#059669,#65a30d)}.t2{background:linear-gradient(135deg,#14b8a6,#2563eb)}
+.cta{border-radius:22px;color:#fff;background:radial-gradient(60% 90% at 90% 0%,rgba(52,211,153,.45),transparent),linear-gradient(135deg,#052e2b,#065f46)}
+.chip{border:1px solid var(--bd);background:var(--card);padding:.35rem .85rem;border-radius:999px;font-size:.8rem}
+.code{font:12.5px/1.75 ui-monospace,Menlo,monospace}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;background:linear-gradient(135deg,#059669,#047857);color:#fff;font-weight:600;padding:.65rem 1.2rem;border-radius:12px;box-shadow:0 8px 20px -8px rgba(5,150,105,.6);transition:opacity .15s,transform .15s}.btn:active{transform:scale(.98)}
+.btn:hover{opacity:.92}.btn-o{background:transparent;color:var(--fg);border:1px solid var(--bd);box-shadow:none}
+.soft{background:var(--soft);color:var(--br)}.bd{border-color:var(--bd)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--br);outline-offset:2px}
+input,select,textarea{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:.6rem .8rem;width:100%;color:var(--fg)}
+.bar{height:6px;border-radius:9px;background:var(--bd)}.bar i{display:block;height:100%;border-radius:9px;background:var(--br)}
+.view{animation:f .2s ease}@keyframes f{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.view{animation:none}}
+</style>
+</head>
+<body class="min-h-screen flex flex-col">
+<header class="sticky top-0 z-20 border-b bd" style="background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px)">
+ <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+  <a href="#home" class="font-extrabold text-xl tracking-tight flex items-center gap-2"><span class="ico !w-8 !h-8 !rounded-lg text-white text-sm font-bold">N</span><span>Nexus<span class="gt">Dig</span></span></a>
+  <nav id="nav" class="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main"></nav>
+  <div class="flex items-center gap-2">
+   <button id="theme" class="btn btn-o !px-3" aria-label="Toggle theme">◐</button>
+   <a href="#dashboard" class="btn hidden sm:inline-flex">Student login</a>
+   <button id="burger" class="btn btn-o md:hidden !px-3" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+ </div>
+ <nav id="mnav" class="hidden md:hidden border-t bd px-4 py-3 flex-col gap-3 text-sm font-medium" aria-label="Mobile"></nav>
+</header>
+
+<main id="app" class="flex-1" tabindex="-1"></main>
+
+<footer class="border-t bd mt-16">
+ <div class="max-w-6xl mx-auto px-4 py-10 grid gap-8 sm:grid-cols-3 text-sm">
+  <div><p class="font-bold text-lg">Nexus<span style="color:var(--br)">Dig</span></p><p class="mut mt-2">Online learning and software, AI &amp; automation services.</p></div>
+  <div><p class="font-semibold mb-2">Explore</p><ul class="space-y-1 mut"><li><a href="#courses">Courses</a></li><li><a href="#services">Services</a></li><li><a href="#contact">Contact</a></li></ul></div>
+  <div><p class="font-semibold mb-2">Legal</p><ul class="space-y-1 mut"><li>Privacy Policy</li><li>Terms &amp; Conditions</li><li>Refund Policy</li></ul></div>
+ </div>
+ <p class="text-center text-xs mut pb-6">© NexusDig. Frontend prototype – all course, price and learner data is placeholder content.</p>
+</footer>
+<div id="toast" role="status" aria-live="polite" class="fixed bottom-5 left-1/2 -translate-x-1/2 card px-4 py-2 text-sm shadow-lg hidden"></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const NAV=[['home','Home'],['courses','Courses'],['services','Services'],['analyzer','Site Analyzer'],['contact','Contact']];
+const courses=[
+ {id:1,t:'Laravel from Zero to Production',cat:'Web Development',lv:'Beginner',h:'24h',p:49,d:39,by:'Instructor name',s:[
+  ['Getting started',[['Course introduction',1],['Installing the toolchain',1],['Routing and controllers',0]]],
+  ['Databases',[['Migrations and Eloquent',0],['Relationships',0],['Live Q&A session',0,'live']]]]},
+ {id:2,t:'Build AI Chatbots with RAG',cat:'Artificial Intelligence',lv:'Intermediate',h:'18h',p:79,d:null,by:'Instructor name',s:[
+  ['Foundations',[['How LLM APIs work',1],['Prompt design',0]]],
+  ['Retrieval',[['Embeddings and vector search',0],['Document assistant project',0]]]]},
+ {id:3,t:'Telegram Bots with Automation',cat:'Bot Development',lv:'Beginner',h:'10h',p:29,d:null,by:'Instructor name',s:[
+  ['Basics',[['Bot API overview',1],['Handling commands',0]]],
+  ['Workflows',[['Scheduled tasks',0],['Lead capture bot',0]]]]}
+];
+const services=[
+ ['🌐','Web Development','Business sites, custom Laravel apps, e-commerce, SaaS and APIs.'],
+ ['📱','Mobile App Development','Android and cross-platform apps with backend APIs.'],
+ ['⚙️','Software Development','Internal systems, CRM/ERP, workflow automation, integrations.'],
+ ['📈','SEO & Digital Growth','Technical SEO, performance tuning, analytics and audits.'],
+ ['🤖','AI Services','Chatbots, AI agents, RAG apps and knowledge-base assistants.'],
+ ['✈️','Bots & Automation','Telegram and messaging bots, support automation, follow-ups.']
+];
+const price=c=>c.d?`<s class="mut text-sm">$${c.p}</s> <b>$${c.d}</b>`:`<b>$${c.p}</b>`;
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.remove('hidden');clearTimeout(toast.x);toast.x=setTimeout(()=>t.classList.add('hidden'),2600)};
+const ccard=c=>`<a href="#course/${c.id}" class="card p-5 flex flex-col gap-3">
+ <div class="thumb t${c.id%3}" aria-hidden="true">🎓</div>
+ <div class="flex gap-2 text-xs"><span class="soft px-2 py-0.5 rounded-full">${c.cat}</span><span class="mut py-0.5">${c.lv} · ${c.h}</span></div>
+ <h3 class="font-semibold leading-snug">${c.t}</h3><p class="mut text-sm">${c.by}</p>
+ <p class="mt-auto">${price(c)}</p></a>`;
+
+const V={
+home:()=>`<div class="hero"><section class="max-w-6xl mx-auto px-4 pt-16 pb-20 grid md:grid-cols-2 gap-12 items-center relative">
+ <div><p class="chip inline-flex items-center gap-2 font-semibold"><i class="w-2 h-2 rounded-full bg-emerald-500"></i>Learning &amp; software services</p>
+ <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mt-5 leading-[1.05]">Learn modern tech. <span class="gt">Hire us to build it.</span></h1>
+ <p class="mut mt-4 text-lg">Practical courses with live classes and mentors, plus custom web, mobile, AI and automation development for your business.</p>
+ <div class="flex flex-wrap gap-3 mt-6"><a class="btn" href="#courses">Browse courses</a><a class="btn btn-o" href="#contact">Request a quote</a></div></div>
+ <div class="grid grid-cols-2 gap-4"><div class="col-span-2 card overflow-hidden shadow-xl"><div class="flex items-center gap-1.5 px-4 py-2.5 border-b bd"><i class="w-2.5 h-2.5 rounded-full bg-red-400"></i><i class="w-2.5 h-2.5 rounded-full bg-amber-400"></i><i class="w-2.5 h-2.5 rounded-full bg-emerald-400"></i><span class="mut text-xs ml-2">routes/web.php</span></div><pre class="code p-4 overflow-x-auto"><span class="mut">// Learn it. Ship it.</span>
+Route::get('/courses', CourseIndex::class);
+Route::post('/inquiry', InquiryController::class);
+<span style="color:var(--br)">$bot</span>->onCommand('start', $welcome);</pre></div>
+  <a href="#courses" class="card p-6"><p class="text-3xl">🎓</p><h2 class="font-semibold mt-3">Online Learning</h2><p class="mut text-sm mt-1">Courses, live classes, recordings.</p></a>
+  <a href="#services" class="card p-6"><p class="text-3xl">🛠️</p><h2 class="font-semibold mt-3">Software &amp; AI</h2><p class="mut text-sm mt-1">Build, integrate, automate.</p></a>
+ </div></section>
+ </div><section class="max-w-6xl mx-auto px-4 mt-8 flex flex-wrap items-center gap-2"><span class="mut text-sm mr-2">What we work with:</span>${['Laravel','Tailwind CSS','MySQL','AI &amp; RAG','Telegram bots','Automation','SEO'].map(x=>`<span class="chip">${x}</span>`).join('')}</section>
+ <section class="max-w-6xl mx-auto px-4 mt-14"><div class="flex justify-between items-end mb-6"><h2 class="text-3xl font-bold tracking-tight">Featured courses</h2><a href="#courses" class="text-sm" style="color:var(--br)">View all →</a></div>
+ <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">${courses.map(ccard).join('')}</div></section>
+ <section class="max-w-6xl mx-auto px-4 mt-14"><h2 class="text-2xl font-bold mb-5">What we build</h2>
+ <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">${services.map(s=>`<div class="card lift p-5"><div class="ico">${s[0]}</div><h3 class="font-semibold mt-4">${s[1]}</h3><p class="mut text-sm mt-1">${s[2]}</p></div>`).join('')}</div></section>
+ <section class="max-w-6xl mx-auto px-4 mt-14"><div class="cta p-10 text-center"><h2 class="text-3xl font-bold">Have a project in mind?</h2><p class="mt-2 opacity-90">Tell us what you need and we’ll reply with next steps.</p><a href="#contact" class="btn mt-6" style="background:#fff;color:#065f46">Start an inquiry</a></div></section>`,
+
+courses:()=>`<section class="max-w-6xl mx-auto px-4 pt-10"><h1 class="text-3xl font-bold">Courses</h1>
+ <div class="flex flex-wrap gap-3 mt-5"><input id="q" class="!w-full sm:!w-72" placeholder="Search courses…" aria-label="Search courses">
+ <select id="cat" class="!w-full sm:!w-56" aria-label="Category"><option value="">All categories</option>${[...new Set(courses.map(c=>c.cat))].map(c=>`<option>${c}</option>`).join('')}</select></div>
+ <div id="list" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-6"></div></section>`,
+
+course:id=>{const c=courses.find(x=>x.id==id)||courses[0];const n=c.s.flat().length;
+ return `<section class="max-w-6xl mx-auto px-4 pt-8"><a href="#courses" class="text-sm mut">← All courses</a>
+ <div class="grid lg:grid-cols-3 gap-8 mt-4">
+ <div class="lg:col-span-2">
+  <p class="soft inline-block text-xs px-2 py-0.5 rounded-full">${c.cat}</p>
+  <h1 class="text-3xl font-bold mt-2">${c.t}</h1><p class="mut mt-2">${c.lv} · ${c.h} · Taught by ${c.by}</p>
+  <div class="card mt-5 aspect-video grid place-items-center"><button class="btn" onclick="toast('Free intro video plays here')">▶ Watch free introduction</button></div>
+  <h2 class="text-xl font-bold mt-8">Syllabus</h2><p class="mut text-sm">${c.s.length} sections · lessons marked 🔒 unlock after enrollment.</p>
+  <div class="mt-3 space-y-3">${c.s.map((s,i)=>`<details class="card" ${i?'':'open'}><summary class="cursor-pointer p-4 font-semibold">${s[0]} <span class="mut text-sm font-normal">· ${s[1].length} lessons</span></summary>
+   <ul class="border-t bd">${s[1].map(l=>`<li class="flex justify-between gap-3 px-4 py-3 text-sm border-b bd last:border-0"><span>${l[2]==='live'?'📡':'▶'} ${l[0]}</span>${l[1]?'<span class="soft px-2 rounded-full text-xs py-0.5">Free preview</span>':'<span class="mut" title="Locked">🔒</span>'}</li>`).join('')}</ul></details>`).join('')}</div>
+ </div>
+ <aside class="card p-5 h-fit lg:sticky lg:top-24"><p class="text-2xl">${price(c)}</p>
+  <button class="btn w-full mt-4" onclick="toast('Checkout is not connected in this prototype')">Enroll now</button>
+  <ul class="mut text-sm mt-4 space-y-1"><li>${n} lessons</li><li>Live classes &amp; recordings</li><li>Access duration set per course</li></ul></aside>
+ </div></section>`},
+
+services:()=>`<section class="max-w-6xl mx-auto px-4 pt-10"><h1 class="text-3xl font-bold">Services</h1><p class="mut mt-2">Software, AI and automation built for your business.</p>
+ <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-6">${services.map(s=>`<div class="card lift p-6 flex flex-col"><div class="ico">${s[0]}</div><h2 class="font-semibold mt-4 text-lg">${s[1]}</h2><p class="mut text-sm mt-1">${s[2]}</p><a class="btn btn-o mt-5" href="#contact" data-svc="${s[1]}">Request a quote</a></div>`).join('')}</div></section>`,
+
+contact:()=>`<section class="max-w-2xl mx-auto px-4 pt-10"><h1 class="text-3xl font-bold">Service inquiry</h1><p class="mut mt-2">Tell us about your project.</p>
+ <form id="f" class="card p-6 mt-6 grid gap-4" novalidate>
+  <label>Name<input name="name" required autocomplete="name"></label>
+  <label>Email<input name="email" type="email" required autocomplete="email"></label>
+  <label>Phone / WhatsApp (optional)<input name="phone" type="tel"></label>
+  <label>Service<select name="svc">${services.map(s=>`<option>${s[1]}</option>`).join('')}</select></label>
+  <div class="grid sm:grid-cols-2 gap-4"><label>Budget<select><option>Under $500</option><option>$500–$2,000</option><option>$2,000+</option></select></label>
+  <label>Timeline<select><option>ASAP</option><option>1–3 months</option><option>Flexible</option></select></label></div>
+  <label>Project description<textarea name="msg" rows="4" required minlength="20"></textarea></label>
+  <p id="err" class="text-sm text-red-500 hidden" role="alert"></p>
+  <button class="btn">Send inquiry</button></form></section>`,
+
+analyzer:()=>`<section class="max-w-4xl mx-auto px-4 pt-10"><h1 class="text-3xl font-bold">Website analyzer</h1><p class="mut mt-2">Check speed, SEO, accessibility and best practices for any page.</p>
+ <form id="az" class="card p-5 mt-6 flex flex-col sm:flex-row gap-3" novalidate><input name="u" placeholder="example.com" aria-label="Website address" required><select name="dev" class="sm:!w-40" aria-label="Device"><option value="mobile">Mobile</option><option value="desktop">Desktop</option></select><button class="btn">Analyze</button></form>
+ <p id="azerr" class="text-sm text-red-500 mt-2 hidden" role="alert"></p><div id="res" class="mt-6"><div class="card p-8 text-center mut">Enter a website address to see a report.</div></div></section>`,
+
+dashboard:()=>`<section class="max-w-6xl mx-auto px-4 pt-10"><div class="flex flex-wrap justify-between gap-3 items-end"><div><h1 class="text-3xl font-bold">My dashboard</h1><p class="mut text-sm">Sample data for layout preview.</p></div></div>
+ <div class="grid lg:grid-cols-3 gap-6 mt-6">
+  <div class="lg:col-span-2 space-y-4"><h2 class="font-semibold">Continue learning</h2>
+   ${[[courses[0],62,'Relationships'],[courses[1],18,'Prompt design']].map(([c,p,l])=>`<div class="card p-5"><div class="flex justify-between gap-3"><div><h3 class="font-semibold">${c.t}</h3><p class="mut text-sm">Next: ${l}</p></div><a class="btn !py-1.5 self-start" href="#course/${c.id}">Resume</a></div>
+   <div class="bar mt-4" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100"><i style="width:${p}%"></i></div><p class="mut text-xs mt-1">${p}% complete</p></div>`).join('')}
+   <h2 class="font-semibold pt-2">Recent orders</h2>
+   <div class="card overflow-x-auto"><table class="w-full text-sm"><thead class="mut text-left"><tr><th class="p-3">Order</th><th>Course</th><th>Amount</th><th>Status</th></tr></thead><tbody>
+   <tr class="border-t bd"><td class="p-3">#ND-0001</td><td>Laravel from Zero…</td><td>$39</td><td><span class="soft px-2 py-0.5 rounded-full text-xs">Paid</span></td></tr>
+   <tr class="border-t bd"><td class="p-3">#ND-0002</td><td>Build AI Chatbots…</td><td>$79</td><td><span class="soft px-2 py-0.5 rounded-full text-xs">Pending</span></td></tr></tbody></table></div></div>
+  <aside class="space-y-4"><div class="card p-5"><h2 class="font-semibold">Upcoming class</h2><p class="mt-2 text-sm">Live Q&amp;A session</p><p class="mut text-sm">Saturday, 7:00 PM (your local time)</p>
+   <button class="btn w-full mt-4" onclick="toast('Meeting link is released by the server to enrolled students only')">Join live class</button></div>
+   <div class="card p-5"><h2 class="font-semibold">Recordings</h2><ul class="mut text-sm mt-2 space-y-1"><li>▶ Routing recap</li><li>▶ Eloquent workshop</li></ul></div></aside>
+ </div></section>`
+};
+
+const esc=s=>s.replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+function report(h,dev){let s=0;for(const c of h)s=(s*31+c.charCodeAt(0))>>>0;const rnd=()=>(s=(s*1664525+1013904223)>>>0)/4294967296;
+ const sc=(a,b)=>Math.round(a+rnd()*(b-a)),m=dev==='mobile';
+ const S=[['Performance',sc(m?38:60,m?88:98)],['Accessibility',sc(70,98)],['Best Practices',sc(70,100)],['SEO',sc(65,100)]];
+ const col=n=>n>=90?'#059669':n>=50?'#d97706':'#dc2626';
+ const g=([l,n])=>`<div class="card p-4 text-center"><svg viewBox="0 0 36 36" class="w-24 h-24 mx-auto -rotate-90" aria-hidden="true"><circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--bd)" stroke-width="3"/><circle cx="18" cy="18" r="15.9" fill="none" stroke="${col(n)}" stroke-width="3" stroke-linecap="round" stroke-dasharray="${n} 100"/></svg><p class="text-2xl font-bold -mt-16 mb-10 relative" style="color:${col(n)}">${n}</p><p class="text-sm font-medium">${l}</p></div>`;
+ const fcp=(m?1.2+rnd()*2:.6+rnd()*1.4).toFixed(1),lcp=(m?2+rnd()*3:1+rnd()*2).toFixed(1),tbt=sc(m?150:30,m?600:250),cls=(rnd()*.3).toFixed(2);
+ const VT=[['First Contentful Paint',fcp+' s',fcp<1.8],['Largest Contentful Paint',lcp+' s',lcp<2.5],['Total Blocking Time',tbt+' ms',tbt<200],['Cumulative Layout Shift',cls,cls<.1]];
+ const C=['Title tag present, 50–60 characters','Meta description present','Single H1 heading','Images have alt text','Canonical URL set','robots.txt reachable','XML sitemap found','Page is mobile friendly','Served over HTTPS','Structured data detected'];
+ const ic={ok:'✅',warn:'⚠️',bad:'❌'};
+ const ck=C.map(t=>{const r=rnd();return [t,r>.35?'ok':r>.15?'warn':'bad']});
+ const O=['Serve images in next-gen formats','Eliminate render-blocking resources','Enable text compression','Reduce unused JavaScript'].map(t=>[t,sc(100,1800)]);
+ return `<p class="card p-3 text-sm mb-4" role="note"><b>Demo mode:</b> these numbers are generated in your browser and are not a real scan. A production version would run the Laravel backend against the Google PageSpeed Insights API.</p>
+ <h2 class="text-xl font-bold mb-3">${esc(h)} <span class="soft text-xs px-2 py-0.5 rounded-full align-middle">${m?'Mobile':'Desktop'}</span></h2>
+ <div class="grid grid-cols-2 md:grid-cols-4 gap-4">${S.map(g).join('')}</div>
+ <h3 class="font-semibold mt-8 mb-3">Core metrics</h3><div class="grid grid-cols-2 md:grid-cols-4 gap-4">${VT.map(v=>`<div class="card p-4"><p class="mut text-xs">${v[0]}</p><p class="text-xl font-bold mt-1" style="color:${v[2]?'#059669':'#d97706'}">${v[1]}</p></div>`).join('')}</div>
+ <div class="grid md:grid-cols-2 gap-6 mt-8"><div><h3 class="font-semibold mb-3">SEO checklist</h3><ul class="card divide-y" style="--tw-divide-color:var(--bd)">${ck.map(c=>`<li class="flex gap-2 p-3 text-sm"><span aria-hidden="true">${ic[c[1]]}</span><span>${c[0]}</span></li>`).join('')}</ul></div>
+ <div><h3 class="font-semibold mb-3">Opportunities</h3><ul class="card">${O.map(o=>`<li class="flex justify-between gap-3 p-3 text-sm border-b bd last:border-0"><span>${o[0]}</span><span class="mut whitespace-nowrap">~${o[1]} ms</span></li>`).join('')}</ul>
+ <div class="cta p-6 mt-4"><p class="font-semibold">Want these issues fixed?</p><p class="text-sm opacity-90 mt-1">Our team handles technical SEO and performance work.</p><a href="#contact" class="btn mt-4" style="background:#fff;color:#065f46">Request an SEO audit</a></div></div></div>`}
+function bindAnalyzer(){const f=$('#az');f.onsubmit=e=>{e.preventDefault();const er=$('#azerr'),v=f.u.value.trim();let u;
+ try{u=new URL(/^https?:\/\//i.test(v)?v:'https://'+v);if(!u.hostname.includes('.'))throw 0}catch{er.textContent='Enter a valid website address, e.g. example.com';er.classList.remove('hidden');return}
+ er.classList.add('hidden');const r=$('#res');r.innerHTML='<div class="card p-8 text-center mut" aria-busy="true">Analyzing '+esc(u.hostname)+'…</div>';
+ setTimeout(()=>{r.innerHTML=report(u.hostname,f.dev.value)},900)}}
+function route(){
+ const [v,arg]=(location.hash.slice(1)||'home').split('/');const k=V[v]?v:'home';
+ const app=$('#app');app.innerHTML=`<div class="view">${V[k](arg)}</div>`;
+ document.title='NexusDig – '+k[0].toUpperCase()+k.slice(1);window.scrollTo(0,0);
+ const links=NAV.map(([h,l])=>`<a href="#${h}" ${k===h||(k==='course'&&h==='courses')?'style="color:var(--br)" aria-current="page"':''}>${l}</a>`).join('');
+ $('#nav').innerHTML=links;$('#mnav').innerHTML=links+'<a href="#dashboard">Student login</a>';
+ $('#mnav').classList.add('hidden');$('#burger').setAttribute('aria-expanded','false');
+ if(k==='courses'){const draw=()=>{const q=$('#q').value.toLowerCase(),c=$('#cat').value;const r=courses.filter(x=>x.t.toLowerCase().includes(q)&&(!c||x.cat===c));
+  $('#list').innerHTML=r.length?r.map(ccard).join(''):'<p class="mut col-span-full card p-6 text-center">No courses match your search.</p>'};
+  $('#q').oninput=$('#cat').onchange=draw;draw()}
+ if(k==='analyzer')bindAnalyzer();
+ if(k==='contact'){$('#f').onsubmit=e=>{e.preventDefault();const f=e.target,er=$('#err');
+  const bad=!f.name.value.trim()?'Please enter your name.':!/^\S+@\S+\.\S+$/.test(f.email.value)?'Please enter a valid email.':f.msg.value.trim().length<20?'Describe your project in at least 20 characters.':'';
+  er.textContent=bad;er.classList.toggle('hidden',!bad);if(!bad){f.reset();toast('Inquiry validated (not sent in this prototype)')}}}
+}
+$('#burger').onclick=()=>{const m=$('#mnav'),o=m.classList.toggle('hidden');m.classList.toggle('flex',!o);$('#burger').setAttribute('aria-expanded',String(!o))};
+$('#theme').onclick=()=>{const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark'};
+addEventListener('hashchange',route);route();
+</script>
+</body>
+</html>
