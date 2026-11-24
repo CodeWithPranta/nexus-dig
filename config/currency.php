@@ -7,12 +7,12 @@ return [
     | Default Currency
     |--------------------------------------------------------------------------
     |
-    | BDT is the platform default. Amounts are stored in the currency recorded
+    | USD is the platform default. Amounts are stored in the currency recorded
     | on each record and converted for display using the exchange rates below.
     |
     */
 
-    'default' => env('DEFAULT_CURRENCY', 'BDT'),
+    'default' => env('DEFAULT_CURRENCY', 'USD'),
 
     'base' => 'USD',
 

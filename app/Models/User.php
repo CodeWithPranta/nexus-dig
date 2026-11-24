@@ -51,7 +51,12 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->isSuperAdmin() || $this->isTeacher();
+        return $this->isActive() && ($this->isSuperAdmin() || $this->isTeacher());
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === 'active';
     }
 
     public function isSuperAdmin(): bool

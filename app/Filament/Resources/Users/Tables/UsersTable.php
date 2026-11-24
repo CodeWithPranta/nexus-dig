@@ -43,6 +43,12 @@ class UsersTable
                     }),
                 TextColumn::make('phone')
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('last_login_at')
+                    ->label('Last login')
+                    ->dateTime()
+                    ->since()
+                    ->placeholder('Never')
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Joined')
                     ->dateTime()

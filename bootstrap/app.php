@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureUserIsActive;
 use App\Http\Middleware\SetCurrency;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
@@ -17,6 +18,14 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             SetLocale::class,
             SetCurrency::class,
+            EnsureUserIsActive::class,
+        ]);
+
+        $middleware->redirectGuestsTo(fn (): string => route('login'));
+        $middleware->redirectUsersTo(fn (): string => route('dashboard'));
+
+        $middleware->validateCsrfTokens(except: [
+            'payments/paystation/ipn',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

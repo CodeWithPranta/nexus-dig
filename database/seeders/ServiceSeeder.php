@@ -16,6 +16,10 @@ class ServiceSeeder extends Seeder
             ['name' => 'SEO & Content', 'slug' => 'seo-content'],
             ['name' => 'Web Development', 'slug' => 'web-development'],
             ['name' => 'Paid Advertising', 'slug' => 'paid-advertising'],
+            ['name' => 'Mobile Apps', 'slug' => 'mobile-apps'],
+            ['name' => 'Custom Software', 'slug' => 'custom-software'],
+            ['name' => 'AI & Automation', 'slug' => 'ai-automation'],
+            ['name' => 'Telegram Bots', 'slug' => 'telegram-bots'],
         ];
 
         foreach ($categories as $index => $category) {
@@ -26,6 +30,48 @@ class ServiceSeeder extends Seeder
         }
 
         $services = [
+            [
+                'category' => 'web-development',
+                'name' => 'Web Development',
+                'slug' => 'web-development',
+                'starting_price' => 14900,
+                'is_featured' => true,
+            ],
+            [
+                'category' => 'mobile-apps',
+                'name' => 'Mobile App Development',
+                'slug' => 'mobile-app-development',
+                'starting_price' => 24900,
+                'is_featured' => false,
+            ],
+            [
+                'category' => 'custom-software',
+                'name' => 'Software Development',
+                'slug' => 'custom-software',
+                'starting_price' => 39900,
+                'is_featured' => false,
+            ],
+            [
+                'category' => 'seo-content',
+                'name' => 'SEO & Digital Growth',
+                'slug' => 'seo-content',
+                'starting_price' => 9900,
+                'is_featured' => false,
+            ],
+            [
+                'category' => 'ai-automation',
+                'name' => 'AI Services',
+                'slug' => 'ai-automation',
+                'starting_price' => 19900,
+                'is_featured' => true,
+            ],
+            [
+                'category' => 'telegram-bots',
+                'name' => 'Bots & Automation',
+                'slug' => 'telegram-bots',
+                'starting_price' => 12900,
+                'is_featured' => false,
+            ],
             [
                 'category' => 'seo-content',
                 'name' => 'Technical SEO Audit',

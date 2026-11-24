@@ -1,5 +1,6 @@
-const CACHE = 'nexusdig-v1';
+const CACHE = 'nexusdig-v5';
 const SHELL = ['/', '/manifest.json', '/favicon.ico'];
+const PRIVATE_PATHS = ['/dashboard', '/admin', '/checkout', '/payments', '/login', '/register', '/forgot-password', '/reset-password', '/logout'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -24,6 +25,11 @@ self.addEventListener('fetch', event => {
   }
 
   if (request.mode === 'navigate' || request.destination === 'document') {
+    if (PRIVATE_PATHS.some(path => url.pathname === path || url.pathname.startsWith(`${path}/`))) {
+      event.respondWith(fetch(request));
+      return;
+    }
+
     event.respondWith(
       fetch(request)
         .then(response => {
@@ -32,6 +38,26 @@ self.addEventListener('fetch', event => {
           return response;
         })
         .catch(() => caches.match(request).then(cached => cached || caches.match('/')))
+    );
+    return;
+  }
+
+  if (
+    request.destination === 'script' ||
+    request.destination === 'style' ||
+    url.pathname.startsWith('/build/') ||
+    url.pathname.startsWith('/resources/')
+  ) {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          if (response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE).then(cache => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
     );
     return;
   }

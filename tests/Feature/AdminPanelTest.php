@@ -27,7 +27,7 @@ it('lets a super admin access the admin dashboard', function () {
         ->assertOk();
 });
 
-it('shows dashboard revenue in BDT by default', function () {
+it('shows dashboard revenue in USD by default', function () {
     Order::create([
         'user_id' => User::factory()->create()->id,
         'order_number' => 'ND-REVENUE-1',
@@ -47,7 +47,7 @@ it('shows dashboard revenue in BDT by default', function () {
         }
     };
 
-    expect($widget->stats()[0]->getValue())->toBe('৳৩৫,৮০০');
+    expect($widget->stats()[0]->getValue())->toBe('$298.33');
 });
 
 it('blocks students from the admin panel', function () {

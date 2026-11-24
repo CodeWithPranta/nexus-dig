@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    'paystation' => [
+        'environment' => env('PAYSTATION_ENV', 'sandbox'),
+        'merchant_id' => env('PAYSTATION_MERCHANT_ID'),
+        'password' => env('PAYSTATION_PASSWORD'),
+        'currency' => env('PAYSTATION_CURRENCY', 'BDT'),
+        'sandbox_url' => env('PAYSTATION_SANDBOX_URL', 'https://sandbox.paystation.com.bd'),
+        'live_url' => env('PAYSTATION_LIVE_URL', 'https://api.paystation.com.bd'),
+    ],
+
 ];

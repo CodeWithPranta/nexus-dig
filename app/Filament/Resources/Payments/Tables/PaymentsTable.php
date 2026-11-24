@@ -20,6 +20,9 @@ class PaymentsTable
                     ->searchable(),
                 TextColumn::make('transaction_ref')
                     ->searchable(),
+                TextColumn::make('gateway_reference')
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('amount')
                     ->numeric()
                     ->sortable(),

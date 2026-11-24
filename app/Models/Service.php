@@ -69,4 +69,9 @@ class Service extends Model
     {
         return $this->hasMany(ServiceInquiry::class);
     }
+
+    public function orderItems(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

@@ -18,6 +18,15 @@ class OrderItemForm
                     ->required(),
                 Select::make('course_id')
                     ->relationship('course', 'title'),
+                Select::make('service_id')
+                    ->relationship('service', 'name'),
+                Select::make('item_type')
+                    ->options([
+                        'course' => 'Course',
+                        'service' => 'Service',
+                    ])
+                    ->default('course')
+                    ->required(),
                 TextInput::make('course_title')
                     ->required(),
                 TextInput::make('price')

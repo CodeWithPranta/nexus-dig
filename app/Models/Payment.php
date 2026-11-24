@@ -15,6 +15,7 @@ class Payment extends Model
         'order_id',
         'provider',
         'transaction_ref',
+        'gateway_reference',
         'amount',
         'currency',
         'status',

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Orders\Tables;
 
 use App\Models\Order;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -56,6 +57,16 @@ class OrdersTable
             ])
             ->defaultSort('created_at', 'desc')
             ->recordActions([
+                Action::make('markPaid')
+                    ->label('Mark as paid')
+                    ->icon('heroicon-o-check-circle')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->visible(fn (Order $record): bool => $record->status !== 'paid')
+                    ->action(fn (Order $record) => $record->update([
+                        'status' => 'paid',
+                        'paid_at' => now(),
+                    ])),
                 EditAction::make(),
                 DeleteAction::make(),
             ])
